@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <section id="collab-section">
+            <section id="tracks-section">
+                <div class="section-header">
+                    <h2>Tracks</h2>
+                    <button id="play-all-tracks" onclick="playTrack('all')">Play all tracks</button>
+                    <button id="stop-all-tracks" onclick="stopTrack('all')">Stop all tracks</button>
+                </div>
+                <ul id="tracks"></ul>
+            </section>
+            <section id="messages-section">
+                <div class="section-header">
+                    <h2>Messages</h2>
+                </div>
+                <ul id="messages"></ul>
+            </section>
+        </section>
+        <section id="track-editor-section">
+            <div class="section-header">
+                <h2>Editor</h2>
+                <button onclick="sendTrack()">Send track</button>
+                <button onclick="playTrack('editor')">Play track</button>
+                <button onclick="playTrack('all-editor')">Play track with all</button>
+                <button onclick="stopTrack('')">Stop track</button>
+            </div>
+            <div><textarea id="script-editor" spellcheck="false"></textarea></div>
+            <div><textarea id="track-editor" spellcheck="false"></textarea></div>
+        </section>
+    </div>
+    <script src="https://unpkg.com/@strudel/web@1.0.3"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.js"></script>
+    <script src="/strudel.js"></script>
+    <script>
+        const trackElt = document.getElementById('track-editor');
+        trackElt.innerHTML = getTune();
+        const scriptElt = document.getElementById('script-editor');
+        scriptElt.innerHTML = "samples('github:tidalcycles/dirt-samples');"
+    </script>
+
+</html>
