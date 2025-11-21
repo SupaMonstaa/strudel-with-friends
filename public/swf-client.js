@@ -1,5 +1,4 @@
 import { io } from "/socket.io/socket.io.esm.min.js";
-import {encode} from '/html-entities/index.js';
 import {
     getEditorTrack,
     playTrack as pTrack,
@@ -71,7 +70,7 @@ socket.on('user connected', function (user) {
     console.log('user connected', user.userId);
     // add a track
     createTrack(user, false);
-    addMsg(userId, "joined");
+    addMsg(user.userId, "joined");
     //window.scrollTo(0, document.body.scrollHeight);
 });
 

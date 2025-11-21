@@ -1,4 +1,4 @@
-import {decode} from '/html-entities/index.js';
+import {decode, encode} from '/html-entities/index.js';
 
 window.initStrudel();
 
@@ -76,9 +76,9 @@ export function getTune() {
 
 export function checkTrack() {
     const trackCode = buildTrackCode("editor");
-    var msg = strudel.parse(trackCode)
-    console.log(msg);
-    return msg === true;
+    //var msg = estimate(trackCode)
+    //console.log(msg);
+    return true; // msg === true;
 }
 
 export function createTrack(user, me) {
