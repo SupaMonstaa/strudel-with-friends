@@ -84,7 +84,7 @@ socket.on('user disconnected', function (userId) {
 // receive message from other user
 socket.on('message', function ({ userId, script, track }) {
     console.log('message', userId, script, track);
-    addMsg("update")
+    addMsg(userId, "update")
     fillTrack(userId, script, track);
     //window.scrollTo(0, document.body.scrollHeight);
 });
