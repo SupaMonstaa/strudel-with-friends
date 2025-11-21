@@ -2,7 +2,6 @@ body {
     background-color: #333;
     color:#FFF;
     margin: 0;
-    padding-bottom: 3rem;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 .container {
@@ -11,25 +10,40 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction:column;
+    gap: 0.5vh;
 }
 .container > * {
-    flex: 2 0 auto;
+    flex: 0 1 50%;
 }
 .container #collab-section {
-    align-items: stretch;
+    flex: 1 0 50%;
     display: flex;
+    gap: 0.5vh;
+    max-height: 50vh;
 }
 .container #collab-section #tracks-section {
-    flex: 2 1 auto;
-    padding-right: 2%
+    display: flex;
+    flex-direction: column;
+    flex: 2 1 70%;
 }
 .container #collab-section #messages-section {
-    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 30%;
 }
 .container #track-editor-section {
-    padding-top: 2vh;
     width:100%;
+    display:flex;
+    flex-direction: column;
 }
+.container #track-editor-section > #script-editor {
+    flex: 1 0 20%;
+}
+.container #track-editor-section > #track-editor {
+    margin-top: 0.5vh;
+    flex: 2 1 80%;
+}
+
 
 button {
     border: none;
@@ -55,6 +69,7 @@ button:active {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    overflow-y:auto;
 }
 
 #messages>li {
@@ -84,6 +99,7 @@ button:active {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    overflow-y:scroll;
 }
 
 #tracks>li {
@@ -114,7 +130,6 @@ textarea {
     width: 100%;
     color:#000;
     font-family: 'Courier New', Courier, monospace;
-    height:20vh;
     font-size: 1em;
     border: 0;
     background: #eee;

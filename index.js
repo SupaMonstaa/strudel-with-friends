@@ -8,8 +8,14 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+// html entities for front
+app.use('/html-entities/', express.static(__dirname + '/node_modules/html-entities/dist/esm/'));
+
+
 const { Server } = require("socket.io");
 const io = new Server(server);
+
+// middleware to get the data of a potentiol user reconnexion
 io.use(function (socket, next) {
     var handshakeData = socket.request;
     console.log("handshake", handshakeData._query);
