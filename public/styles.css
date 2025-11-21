@@ -70,19 +70,18 @@ button:active {
     margin: 0;
     padding: 0;
     overflow-y:auto;
+    height:100%;
+    background-color: #000;
+    border-radius: 2px;
 }
 
 #messages>li {
-    padding: 0.5rem 1rem;
-}
-
-#messages>li:nth-child(odd) {
-    background: #efefef;
+    padding: 0.2rem 1rem;
+    color: #FFF;
 }
 
 #messages>li.me {
-    background: #007bff;
-    color: #fff;
+    color: #007bff;
 }
 
 .section-header {
