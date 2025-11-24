@@ -1,15 +1,16 @@
 import { io } from '/socket.io/socket.io.esm.min.js'
 import {
-  getEditorTrack,
-  playTrack as pTrack,
-  resumePlay as rTrack,
-  stopTrack as sTrack,
-  getTune as gTune,
-  createTrack,
-  fillTrack,
-  checkTrack,
-  destroyTrack,
-} from './strudel-utils.js'
+    getEditorTrack,
+    playTrack as pTrack,
+    resumePlay as rTrack,
+    stopTrack as sTrack,
+    getTune as gTune,
+    createTrack,
+    fillTrack,
+    fillEditor,
+    checkTrack,
+    destroyTrack
+} from './strudel-utils.js';
 
 import { setMyUserId, add as addMsg } from './msg-utils.js'
 
@@ -46,16 +47,19 @@ export function sendTrack() {
 }
 
 // I connected, the server returns the list of all other users
-socket.on('connected', function ({ userId, users }) {
-  window.location.hash = userId
-  myUserId = userId
-  setMyUserId(myUserId)
-  console.log('connected', userId, users)
-  users.forEach((user) => {
-    console.log('create User ', user.userId)
-    createTrack(user, user.userId === myUserId)
-    addMsg(user.userId, 'connected')
-  })
+socket.on("connected", function ({ userId, users }) {
+    window.location.hash = userId;
+    myUserId = userId;
+    setMyUserId(myUserId)
+    console.log("connected", userId, users);
+    users.forEach(user => {
+        console.log("create User ", user.userId);
+        createTrack(user, user.userId === myUserId);
+        if (user.userId === myUserId) {
+            fillEditor(user.script, user.track);
+        }
+        addMsg( user.userId, "connected");
+    })
 })
 
 // new user

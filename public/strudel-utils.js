@@ -1,6 +1,8 @@
 import { decode, encode } from '/html-entities/index.js'
 
-window.initStrudel()
+window.initStrudel({
+    prebake: () => samples('github:tidalcycles/dirt-samples')
+});
 
 export function getEditorTrack() {
   var scriptElt = document.getElementById('script-editor')
@@ -12,11 +14,12 @@ export function getEditorTrack() {
 
 var playMode = ''
 export function playTrack(userId) {
-  playMode = userId
-  const trackCode = buildTrackCode(userId)
-  evaluate(trackCode)
-    .then((msg) => console.log(msg))
-    .catch((msg) => console.warn(msg))
+    playMode = userId;
+    const trackCode = buildTrackCode(userId);
+    console.log("evaluate", trackCode)
+    evaluate(trackCode)
+    .then(msg => console.log(msg))
+    .catch(msg => console.warn(msg))
 }
 function buildTrackCode(userId) {
   if (userId !== 'editor') {
@@ -78,7 +81,11 @@ export function stopTrack(userId) {
 }
 
 export function getTune() {
-  return `n("<0 4 0 9 7 0 3 2>*16").scale("g:minor"),\ns("<bd hh sd hh>*8")`
+    // "<0 9 0 7 4 0 3 2>*16".scale("g:minor").transpose(12).note(),
+//"<0 0 0 0 7 7 9 9>*8"
+//.scale("g:minor").transpose(-12).note().sound("sawtooth"),
+//s("bd ~ sd ~ bd ~ sd [~ ~ ~ hh:2] ,<hh hh hh hh>*16").bank("808")
+    return `n("<0 4 0 9 7 0 3 2>*16").scale("g:minor"),\ns("<bd hh sd hh>*8")`;
 }
 
 export function checkTrack() {
@@ -108,15 +115,27 @@ export function createTrack(user, me) {
             </div>
         </div>
         <div class='script'>${user.script}</div>
-        <div class='track'>${user.track}</div>`
-    trackElt.classList.add('track', 'active')
-    if (me) {
-      trackElt.classList.add('me')
+        <div class='track'>${user.track}</div>`;
+        trackElt.classList.add("track", "active");
+        if (me) {
+            trackElt.classList.add('me');
+        }
+        tracks.appendChild(trackElt);
     }
-    tracks.appendChild(trackElt)
-  }
-  return trackElt
+    return trackElt;
 }
+
+export function fillEditor(script, track) {
+    if (script) {
+        const scriptElt = document.getElementById('script-editor');
+        scriptElt.innerHTML = script;
+    }
+    if (track) {
+        const trackElt = document.getElementById('track-editor');
+        trackElt.innerHTML = track;
+    }
+}
+
 export function fillTrack(userId, script, track) {
   var trackElt = document.getElementById(`user-${userId}`)
   console.log('fillTrack', userId, script, track)
