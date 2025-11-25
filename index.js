@@ -10,17 +10,11 @@ import express from 'express'
 const app = express()
 const server = createServer(app)
 
-app.use(express.static('public'))
-app.get('/', (req, res) => {
+app.use(express.static('client-app/dist'))
+/*app.get('/', (req, res) => {
   console.log('serving index.html')
   res.sendFile(__dirname + '/index.html')
-})
-
-// html entities for front
-app.use(
-  '/html-entities/',
-  express.static(__dirname + '/node_modules/html-entities/dist/esm/')
-)
+})*/
 
 import { Server } from 'socket.io'
 const io = new Server(server)
