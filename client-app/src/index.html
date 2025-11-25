@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="./style.scss">
+</head>
+
+<body>
+    <div class="container">
+        <section id="collab-section">
+            <section id="tracks-section">
+                <div class="section-header">
+                    <h2>Tracks</h2>
+                    <button id="play-all-tracks" onclick="swf.playTrack('all')">Play all tracks</button>
+                    <button id="stop-all-tracks" onclick="swf.stopTrack('all')">Stop all tracks</button>
+                </div>
+                <ul id="tracks"></ul>
+            </section>
+            <section id="messages-section">
+                <div class="section-header">
+                    <h2>History</h2>
+                </div>
+                <ul id="messages"></ul>
+            </section>
+        </section>
+        <section id="track-editor-section">
+            <div class="section-header">
+                <h2>Editor</h2>
+                <button onclick="swf.sendTrack()">Send track</button>
+                <button onclick="swf.playTrack('editor')">Play Editor Track</button>
+                <button onclick="swf.playTrack('all-editor')">Play Editor Track with other tracks</button>
+                <button onclick="swf.stopTrack('')">Stop Editor Track</button>
+            </div>
+            <textarea id="script-editor" spellcheck="false"></textarea>
+            <textarea id="track-editor" spellcheck="false"></textarea>
+        </section>
+    </div>
+    <div class="popin">
+
+    </div>
+    <script src="https://unpkg.com/@strudel/web@1.2.6"></script>
+    <script type="module">
+        import * as swf from "../static/swf-client.js";
+        window.swf = swf;
+        const trackElt = document.getElementById('track-editor');
+        trackElt.innerHTML = swf.getTune();
+        const scriptElt = document.getElementById('script-editor');
+        scriptElt.innerHTML = "samples('github:tidalcycles/dirt-samples');"
+    </script>
+
+</html>
